@@ -3,9 +3,7 @@ package org.pac4j.javalin;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.UnauthorizedResponse;
-import org.jetbrains.annotations.NotNull;
 import org.pac4j.core.config.Config;
-import org.pac4j.core.context.session.JEESessionStore;
 import org.pac4j.core.context.session.SessionStore;
 import org.pac4j.core.engine.DefaultSecurityLogic;
 import org.pac4j.core.engine.SecurityLogic;
@@ -39,8 +37,8 @@ public class SecurityHandler implements Handler {
     }
 
     @Override
-    public void handle(@NotNull Context javalinCtx) {
-        final SessionStore bestSessionStore = FindBest.sessionStore(null, config, JEESessionStore.INSTANCE);
+    public void handle(Context javalinCtx) {
+        final SessionStore bestSessionStore = FindBest.sessionStore(null, config, JavalinSessionStore.INSTANCE);
         final HttpActionAdapter bestAdapter = FindBest.httpActionAdapter(null, config, JavalinHttpActionAdapter.INSTANCE);
         final SecurityLogic bestLogic = FindBest.securityLogic(null, config, DefaultSecurityLogic.INSTANCE);
 
